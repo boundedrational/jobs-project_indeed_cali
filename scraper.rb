@@ -145,9 +145,7 @@ for element in states
    pageurl = helpurl+"&start="+j.to_s()
    page = Nokogiri::HTML(open(URI::encode(pageurl)))
    page.search("div[@itemtype='http://schema.org/JobPosting']").each do |node|
-
-       if node.count > 0
-
+   if node.count > 0
           jobtitle=node.css("h2 a").inner_html
           jobtitle = Sanitize.clean(jobtitle)
           ident=node.css("h2")
@@ -183,8 +181,6 @@ for element in states
             "efccid"=>'',
             "cmpid"=>'',
             "geo"=>'',
-
-
            }
           
   
@@ -213,12 +209,10 @@ for element in states
                    puts "Skipping already saved record " + record['title']
                  end
               end
-
              
              
-
-           end
-      end
+         end
+    end
    
      j=j + resultsperpage
   end
