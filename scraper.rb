@@ -28,7 +28,7 @@ t='<script type="text/javascript"> function rclk('
 for element in states
  helpurl=queryurl+"l="+element+"&sort=date"
   puts queryurl
-    doc = Nokogiri::HTML(open(URI::encode(helpurl)))
+  doc = Nokogiri::HTML(open(URI::encode(helpurl)))
   resultstotal=doc.search("div[@id='searchCount']").inner_html
   total = resultstotal.sub('Jobs 1 to 10 of','')
   total = total.gsub!(',','')
@@ -58,57 +58,55 @@ for element in states
 
   while j<=resultslimit
     g=0        
-             while c<=resultslimit
-                long_url= "http://fullrss.net/a/http/rss.indeed.com/rss?q=&l=" + url_state + "&sort=date&start="+c.to_s()
-                puts long_url
-                scraping = Nokogiri::XML(open(long_url))
-                c=c+resultsperpage
-                puts c
-                scraping.css("item").each do |result|
-                  puts "try"
-                  identification=result.css('link').inner_html
-                  identification.to_s()
-                  identification=identification.split("-").last
-                  puts identification
-                  text=result.css("description").inner_html
-                  timing=result.css("pubDate").inner_html
-                  
-                  begin
-                    long_content=result.css("content:encoded").inner_html
-                  rescue
-                  end
-                  begin
-                
-                    some_id=result.css("guid").inner_html
-                  rescue
-                  end
-                  begin
-                    map=result.css("georss:point").inner_html
-                    employer=result.css("source").inner_html          
-                  rescue
-                  end
+    while c<=resultslimit
+      long_url= "http://fullrss.net/a/http/rss.indeed.com/rss?q=&l=" + url_state + "&sort=date&start="+c.to_s()
+      puts long_url
+      scraping = Nokogiri::XML(open(long_url))
+      c=c+resultsperpage
+      puts c
+      scraping.css("item").each do |result|
+        puts "try"
+        identification=result.css('link').inner_html
+        identification.to_s()
+        identification=identification.split("-").last
+        puts identification
+        text=result.css("description").inner_html
+        timing=result.css("pubDate").inner_html
+         
+        begin
+          long_content=result.css("content:encoded").inner_html
+        rescue
+        end
+        begin
+          some_id=result.css("guid").inner_html
+        rescue
+        end
+        begin
+                     map=result.css("georss:point").inner_html
+                     employer=result.css("source").inner_html          
+        rescue
+        end
+    
+ 
    
-
-  
-                  text=Sanitize.clean(text)
-                  text.gsub!(/&lt.*?&gt;/im, "")
-                  text.gsub!(/\[/im, "")
-
-
-                  begin
-                   ht[identification]<< long_content
-                  rescue
-                  end
-                  begin
-                   ht[identification]<< text
-                  rescue
-                  end
-                  tt[identification]<< timing
-                  geo[identification]<< map
-  
-                end
-
-             end
+                   text=Sanitize.clean(text)
+                   text.gsub!(/&lt.*?&gt;/im, "")
+                   text.gsub!(/\[/im, "")
+ 
+ 
+                   begin
+                    ht[identification]<< long_content
+                   rescue
+                   end
+                   begin
+                    ht[identification]<< text
+                   rescue
+                   end
+                   tt[identification]<< timing
+                   geo[identification]<< map
+   
+     end
+    end
 
             
  
@@ -130,16 +128,16 @@ for element in states
 
       g=g+1
       if zip!='' && !gt.has_key?(ids) 
-      gt[ids]<< zip
+        gt[ids]<< zip
       end
       if cmpid!='' && !ct.has_key?(ids) 
-      ct[ids]<< cmpid
+        ct[ids]<< cmpid
       end
       if srcid!='' && !st.has_key?(ids) 
-      st[ids]<< srcid
+        st[ids]<< srcid
       end
       if efccid!='' && !et.has_key?(ids) 
-      et[ids]<< efccid
+        et[ids]<< efccid
       end
     end
  
