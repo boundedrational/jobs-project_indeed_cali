@@ -108,9 +108,6 @@ for element in states
      end
     end
 
-            
- 
-
     pageurl = helpurl+"&start="+j.to_s()
     puts pageurl
     page = Nokogiri::HTML(open(URI::encode(pageurl)))
@@ -212,7 +209,7 @@ for element in states
              
              
          end
-    end
+   end
    
      j=j + resultsperpage
   end
