@@ -214,14 +214,11 @@ for element in states
                  else
                   puts "Skipping already saved record " + record['title']
                  end
-
-              rescue
-                 
-                  SQLite3::Exception => e 
-                    puts "Exception occured"
-                    puts e
+              rescue SQLite3::Exception => e 
+                 puts "Exception occured"
+                 puts e
     
-               end
+              end
 
              
              end
